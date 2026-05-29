@@ -96,4 +96,9 @@ Section 길이 권장:
 
 ## Faithful lock 점검
 
-작성 중 원저와 다른 결정 필요 시 즉시 stop + `03_user_tasks.md` 에 sign-off task escalation. 자기 임의 결정 금지.
+작성 중 원저와 다른 결정 필요 시 즉시 stop. 분기 (`docs/rigor-lock.md` §4):
+- KR 에 정확히 부재 (MISSING) → Task M (지도교수 메일) escalation
+- 다른 KR vendor 로 fix 가능 → Task U
+- 자연스러운 KR replication 차원 → Phase 4 본문 명시 의무 (sign-off X)
+
+자기 임의 결정 금지 — 원저 외 method 추가 절대 금지 (Lock B silent-add).

@@ -72,7 +72,11 @@ PASS 시 `05_progress.log` 에 다음 entry append:
 
 FAIL 시:
 - 위반 항목 list
-- `03_user_tasks.md` 에 sign-off / 추가 구현 task append
+- `03_user_tasks.md` 에 분기 task append:
+  - MISSING → Task M (지도교수 메일)
+  - 다른 KR vendor 가능 → Task U (CheckExpert 등 다운로드)
+  - 자연스러운 KR replication → Phase 4 본문 명시 의무 기록
+  - Lock B silent-add → 해당 method 제거 또는 학생 명시 결정
 - Phase 3 entry 차단 + Phase 2 재진입 권고
 
 ## 출력 형식
@@ -81,5 +85,5 @@ FAIL 시:
 
 ## 의무 참조
 
-- `docs/rigor-lock.md` — silent substitute / drop / proxy 의 long-form 정의 + sign-off 양식
-- `docs/phase-2_5-verification.md` — matrix 양식 + 검출 rule 상세
+- `docs/rigor-lock.md` — silent substitute / drop / proxy / **add** 의 long-form 정의 (Lock A 3 + Lock B 1) + §4 분기 양식 (MISSING 메일 / 다른 vendor fix / 자연스러운 자동 진행)
+- `docs/phase-2_5-verification.md` — matrix 양식 + 4 종 검출 rule 상세

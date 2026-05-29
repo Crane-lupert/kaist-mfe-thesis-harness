@@ -71,7 +71,12 @@ AGENTS.md §6 escalation 양식으로 `03_user_tasks.md` 에 task append + Task 
 
 ## Faithful lock §8 점검
 
-진행 중 원저 method / variable / robustness 와 다른 결정이 필요하면 즉시 stop + `03_user_tasks.md` 에 sign-off task escalation (`docs/rigor-lock.md` §5 양식).
+진행 중 원저 method / variable / robustness 와 다른 결정이 필요하면 즉시 stop. 분기 (`docs/rigor-lock.md` §4):
+- KR 에 정확히 부재 (MISSING) → Task M (지도교수 메일) escalation
+- 다른 KR vendor (CheckExpert 등) 로 fix 가능 → 학생 task U
+- 자연스러운 KR replication 차원 → 자동 진행 + Phase 4 본문 명시 의무
+
+원저 외 method 자기 임의 추가 절대 금지 (Lock B silent-add, `docs/rigor-lock.md` §3.4).
 
 ## 완료 후
 
