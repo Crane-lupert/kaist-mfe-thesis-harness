@@ -1,0 +1,53 @@
+# student_notes.md — 학생 본인 노트 (선택)
+
+> 본 파일을 `paper/student_notes.md` 로 복사 후 작성. 비워둬도 됨.
+> agent 가 Phase 0 / 4 에서 이 내용을 참조해 학생 관심사·기존 학습 반영.
+
+## 1. 본 paper 를 선택한 이유
+
+(1-2 문장)
+
+## 2. 본인이 가장 흥미로운 부분
+
+(원저의 어느 method / variable / result 가 특히 관심인지)
+
+## 3. 이미 본 자료
+
+- (예: 원저 저자의 follow-up paper, 본 paper 에 대한 critique, KR 시장 선행 연구)
+- ...
+
+## 4. 본인 사전 가설
+
+(KR 시장에서 원저 결과가 어떻게 나올지 본인 직관 — 결과 해석의 출발점)
+
+- (예: "KR 시장의 개인투자자 비중이 높아서 원저보다 short-term momentum 효과가 더 강할 것")
+- ...
+
+## 5. 지도교수의 가이드 (있으면)
+
+(지도교수가 사전 컨펌한 사항 — 특정 sub-period / 특정 robustness / 특정 KR 시장 해석 강조 등)
+
+## 6. 본인의 학과 졸업논문 양식 정보 (있으면)
+
+- 양식 입수 가능 시점: (예: "다음 학기 시작 시")
+- 양식 종류: (LaTeX / Markdown / 학과 자체 양식)
+- 본문 언어: (한국어 / 영어)
+- 분량 요구: (예: "최소 50페이지")
+- 인용 style: (APA / Chicago / 학회지 양식)
+
+## 7. 본인 데이터 라이선스 상태
+
+- fnguide DataGuide: (학교 라이선스 / 본인 라이선스 / 미보유)
+- CheckExpert: (학교 라이선스 / 본인 라이선스 / 미보유)
+- OpenDART API: (key 발급 완료 / 미발급)
+- 한국은행 ECOS API: (key 발급 완료 / 미발급)
+- 기타: (예: WiseFn / Bloomberg / Refinitiv)
+
+## 8. AI 사용 정책 (학교)
+
+- 학교 / 학과의 AI 보조 사용 policy: (allowed + disclosure 의무 / partial / 금지)
+- 지도교수의 별도 가이드: (예: "본문 모든 줄을 본인이 이해해야 함")
+
+## 9. 기타 노트
+
+(free-form)

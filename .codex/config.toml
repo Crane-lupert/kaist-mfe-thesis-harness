@@ -1,0 +1,99 @@
+# .codex/config.toml — Codex CLI auto-approve allowlist + sandbox config
+#
+# Codex CLI 가 본 repo 에서 동작 시 (--auto overnight mode 포함) 다음 명령을
+# 사전 승인 없이 실행 가능. thesis 작업에 필요한 도구만 포함, 위험 동작 차단.
+
+[approval]
+mode = "allowlist"  # 외부 명령은 명시된 것만 자동 승인, 나머지는 user prompt
+
+# Python ecosystem (thesis code 작성 + 테스트)
+allow_commands = [
+    "python",
+    "python3",
+    "pip",
+    "pip3",
+    "pytest",
+    "uv",                       # 빠른 venv / package manager
+    "ruff",                     # linter
+    "black",                    # formatter
+
+    # PDF / paper 처리 (Phase 0)
+    "marker_single",
+    "marker_full",
+    "docling",
+    "pdftotext",
+    "pdf2txt.py",
+
+    # Thesis build (Phase 4)
+    "pandoc",
+    "latexmk",
+    "xelatex",
+    "pdflatex",
+    "biber",
+    "bibtex",
+
+    # 일반 utility
+    "ls", "cat", "head", "tail", "grep", "find", "wc",
+    "echo", "pwd", "cd",
+    "mkdir", "touch", "cp", "mv",
+    "git status", "git diff", "git log", "git add", "git commit",
+    "git branch", "git checkout",
+
+    # PowerShell (Windows)
+    "powershell -Command",
+    "pwsh -Command",
+    "Get-Content", "Get-ChildItem", "Test-Path",
+]
+
+# 절대 자동 승인 안 되는 명령 (위험)
+deny_commands = [
+    "rm -rf",
+    "git push",
+    "git reset --hard",
+    "git checkout --",
+    "git clean -f",
+    "git branch -D",
+    "sudo",
+    "chmod",
+    "chown",
+    "curl http",      # 임의 URL 자동 fetch 금지 (WebFetch 는 별도 allowlist)
+    "wget http",
+]
+
+[sandbox]
+# Phase 2 autopilot 안 코드 실행 시 작업 디렉토리 제한
+workdir_allow = [
+    "thesis_state/",
+    "code/",
+    "paper/converted/",         # Phase 0 산출
+    "template/",                # Phase 4 thesis build
+]
+
+# 외부 file 변경 금지
+workdir_deny = [
+    "/",
+    "~",
+    "..",                       # parent 디렉토리 변경 금지
+]
+
+[net]
+# 외부 fetch 허용 도메인 (Phase 0 / 1 / 2 의 데이터 / paper 검색)
+allow_domains = [
+    "fnguide.com",
+    "wisefn.co.kr",
+    "krx.co.kr",
+    "data.krx.co.kr",
+    "dart.fss.or.kr",
+    "opendart.fss.or.kr",
+    "ecos.bok.or.kr",
+    "arxiv.org",
+    "ssrn.com",
+    "sciencedirect.com",
+    "academic.oup.com",
+    "doi.org",
+    "scholar.google.com",
+    "github.com",
+    "raw.githubusercontent.com",
+    "pypi.org",
+    "files.pythonhosted.org",
+]

@@ -1,0 +1,71 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# --- Environment ---
+.env
+.env.local
+*.env.local
+
+# --- Paper 원본 (학생 본인 보유, 라이선스 고려) ---
+paper/original.pdf
+paper/supplementary/
+paper/converted/figures/*.png
+paper/converted/figures/*.jpg
+paper/converted/figures/*.pdf
+
+# --- Thesis 작업 결과 (학생이 본인 private repo 에 commit 할지 선택) ---
+# 기본: 작업 결과는 ignore. 학생이 본인 thesis private repo 에 commit 하려면 본 .gitignore 수정.
+thesis_state/00_feasibility.md
+thesis_state/01_methodology_map.md
+thesis_state/02_data_inventory.md
+thesis_state/03_user_tasks.md
+thesis_state/04_agent_tasks.md
+thesis_state/05_progress.log
+thesis_state/06_presentation.md
+thesis_state/07_thesis_draft/
+thesis_state/08_build.log
+thesis_state/09_defense.md
+thesis_state/tool.json
+
+# --- Data raw (vendor 라이선스, never commit) ---
+data/
+*.csv.gz
+*.parquet
+*.feather
+
+# --- Build outputs ---
+template/thesis.pdf
+template/_placeholder.pdf
+template/*.aux
+template/*.log
+template/*.bbl
+template/*.bcf
+template/*.run.xml
+template/*.synctex.gz
+template/*.toc
+template/*.out
+template/*.fls
+template/*.fdb_latexmk
+
+# --- IDE / OS ---
+.vscode/settings.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# --- BUT KEEP these placeholder / README ---
+!thesis_state/README.md
+!paper/README.md
+!code/README.md
+!.gitkeep

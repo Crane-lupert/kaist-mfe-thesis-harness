@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  docs/citation-style.csl — 인용 style placeholder
+
+  본 파일은 pandoc + citeproc 의 default 인용 style 을 정의한다.
+  학과·지도교수가 특정 style (APA / Chicago / Harvard / 학회지 양식 등) 을 요구하면
+  https://www.zotero.org/styles 에서 해당 .csl 파일 download 해서 본 파일 교체.
+
+  기본 제공 = APA 7th edition (가장 흔한 default).
+  Markdown 본문 안에서 `[@author2020]` 또는 `[@author2020, p.5]` 양식으로 인용.
+
+  교체 방법:
+    1. https://www.zotero.org/styles 에서 본인 양식 검색 (예: "Journal of Finance")
+    2. .csl 파일 download
+    3. 본 파일 (`docs/citation-style.csl`) 을 download 한 파일로 덮어쓰기
+    4. agent 가 Phase 4 build 시 자동 적용
+
+  주의: 본 placeholder 는 pandoc 의 default 만 wrap 한 stub.
+  실제 정확한 인용 양식 사용 시 위 절차로 진짜 CSL 파일 사용 의무.
+-->
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0">
+  <info>
+    <title>Default APA (placeholder — replace with actual style)</title>
+    <id>http://www.example.com/placeholder-apa</id>
+    <link href="http://www.example.com/placeholder-apa" rel="self"/>
+    <category citation-format="author-date"/>
+    <updated>2026-05-29T00:00:00+00:00</updated>
+  </info>
+  <citation>
+    <layout>
+      <text macro="author-short"/>
+      <text value=" ("/>
+      <text macro="issued-year"/>
+      <text value=")"/>
+    </layout>
+  </citation>
+  <macro name="author-short">
+    <names variable="author">
+      <name form="short"/>
+    </names>
+  </macro>
+  <macro name="issued-year">
+    <date variable="issued">
+      <date-part name="year"/>
+    </date>
+  </macro>
+</style>

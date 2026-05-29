@@ -1,0 +1,114 @@
+% template/_placeholder.tex
+% CC0 generic skeleton for KAIST FE thesis harness.
+%
+% 사용법:
+%   - 학과 졸업논문 양식을 받으면 thesis.tex 로 이름 바꾸고 drop in.
+%   - 양식이 받기 전에는 이 placeholder 로 dry-run build 가능.
+%   - agent 가 % AGENT_FILL: <section> anchor 를 인식해서 자동 fill.
+%   - anchor 가 없는 양식이면 heading-match fallback (docs/phase-4-thesis-writing.md §3.2).
+
+\documentclass[12pt,a4paper]{report}
+
+% --- 한국어 + 영어 mixed 본문 (XeLaTeX 권장) ---
+\usepackage{xeCJK}
+\setCJKmainfont{Noto Sans KR}      % 학과 표준 폰트로 교체 가능 (예: 함초롬바탕)
+\setmainfont{Times New Roman}
+\usepackage{fontspec}
+
+% --- 일반 기능 ---
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{graphicx}
+\graphicspath{{thesis_state/07_thesis_draft/figures/}}
+\usepackage{booktabs}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, citecolor=black, urlcolor=blue}
+
+% --- 인용 (BibTeX) ---
+\usepackage[backend=biber, style=authoryear, sorting=nyt]{biblatex}
+\addbibresource{thesis_state/07_thesis_draft/references.bib}
+
+% ============================================================
+\begin{document}
+
+% --- 표지 ---
+% AGENT_FILL: title_page
+% (학생 정보: 이름·학번·학과·지도교수. agent 가 자동 채움 또는 학생 본인 작성)
+
+\begin{titlepage}
+\centering
+\vspace*{3cm}
+{\Large 졸업논문 \par}
+\vspace{2cm}
+{\huge\bfseries [Thesis Title 자리]\par}
+\vspace{0.5cm}
+{\large [Subtitle 자리]\par}
+\vspace{3cm}
+{\large 한국과학기술원 경영대학 금융공학프로그램\par}
+\vspace{0.5cm}
+{\large [학생 이름]\par}
+\vspace{0.5cm}
+{\large 지도교수: [지도교수 이름]\par}
+\vfill
+{\large [YYYY 년 MM 월]\par}
+\end{titlepage}
+
+% --- 초록 ---
+\chapter*{Abstract (English)}
+% AGENT_FILL: abstract_en
+
+\chapter*{국문 초록}
+% AGENT_FILL: abstract_kr
+
+\section*{Keywords}
+% AGENT_FILL: keywords
+
+% --- 목차 ---
+\tableofcontents
+\listoffigures
+\listoftables
+
+% --- 본문 ---
+
+\chapter{Introduction}
+\label{ch:introduction}
+% AGENT_FILL: chapter_1_introduction
+
+\chapter{Literature Review}
+\label{ch:literature}
+% AGENT_FILL: chapter_2_literature
+
+\chapter{Data}
+\label{ch:data}
+% AGENT_FILL: chapter_3_data
+
+\chapter{Methodology}
+\label{ch:methodology}
+% AGENT_FILL: chapter_4_methodology
+
+\chapter{Empirical Results}
+\label{ch:results}
+% AGENT_FILL: chapter_5_results
+
+\chapter{Robustness Checks}
+\label{ch:robustness}
+% AGENT_FILL: chapter_6_robustness
+
+\chapter{Discussion}
+\label{ch:discussion}
+% AGENT_FILL: chapter_7_discussion
+
+\chapter{Conclusion}
+\label{ch:conclusion}
+% AGENT_FILL: chapter_8_conclusion
+
+% --- 참고문헌 ---
+\printbibliography[heading=bibintoc, title={참고문헌 / References}]
+
+% --- 부록 (선택) ---
+% AGENT_FILL: appendix
+
+\end{document}

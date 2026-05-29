@@ -1,0 +1,14 @@
+# .cursorrules — Cursor 전용 thin wrapper
+
+본 파일은 AGENTS.md 를 reference 하는 wrapper. 모든 logic 은 AGENTS.md.
+
+## Cursor 사용 시 주의
+
+- 첫 세션 시작 시 composer agent mode 진입 후 "Read AGENTS.md and start Phase 0" 입력.
+- shell 사용 가능하면 `bash tool-routing/detect.sh` (또는 `pwsh tool-routing/detect.ps1`) 실행 → `thesis_state/tool.json` 에 `tool="cursor"`, `capabilities=["step-trigger","composer-agent","edit"]` 자동 작성.
+- Cursor 는 Claude Code 의 `/loop` overnight autopilot 보다 step-trigger 가 자연. phase 별로 학생이 다음 phase trigger 1회씩 입력 필요.
+- 본문 logic 은 AGENTS.md 가 정의. 본 파일은 Cursor 특화 노트만.
+
+## AGENTS.md 본문 (Cursor 가 자동 inline 못 import 하는 경우 학생이 paste)
+
+AGENTS.md 본문 전체를 읽어달라고 Cursor 에 명시 요청 후 진행.
