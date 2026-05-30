@@ -147,3 +147,55 @@ paper 의 sub-period split 그대로 KR 에 적용하면 안 됨 — KR-specific
 - [ ] Paper 의 market portfolio 가 KR 에서 어떤 index 인지 (KOSPI vs KOSPI200 vs KOSPI+KOSDAQ 가중평균 etc)
 
 위 항목 미확인 상태에서 Phase 1 진입 금지.
+
+## 19. Macro / Bond / Economic 매칭 표 (US paper → KR equivalent)
+
+session log 2026-05-30 evidence: 기업 단위 데이터 (재무·시장·수급) 는 fnguide / CheckExpert 로 잘 매칭. **macro / bond / economic indicator 는 매칭 fail 가능성 높음** — vendor 정의 차이 / KR market 의 vendor product 부재 / 시계열 시작 시점 부재. 본 §19 가 1차 mapping reference.
+
+| US paper 변수 | KR equivalent | KR vendor / source | 주의 |
+|---|---|---|---|
+| **3-month T-bill (Risk-free)** | 91일 통안증권 또는 한국은행 기준금리 | ECOS (한국은행) | KR 1-month T-bill **미발행** — 91d CD 또는 91d 통안 사용 (§4.3 자연 KR replication) |
+| **1-month T-bill** | 91일 통안 (KR proxy) | ECOS | 동상 |
+| **3-month gov bond yield** | 91일 통안 또는 91일 CD | ECOS / KOFIA | |
+| **2y / 5y / 10y gov bond yield** | 국고채 2년 / 5년 / 10년 | ECOS `시장금리:국고N년` | 시작 2000-11 (10y) — sample period 제약 |
+| **10y gov bond total return** | 국고채총수익지수 | KIS Pricing / fnguide | TR index 사용, pct_change → monthly return |
+| **AAA corp bond yield** | AAA 회사채 무보증 | KOFIA / ECOS `시장금리:회사채(무보증3년AAA)` | KR 등급 매핑: AAA / AA / A / BBB |
+| **AAA corp bond total return** | 회사채 무보증 AAA TR index | KIS Pricing 채권총수익지수 | |
+| **BAA corp bond yield (~BBB-)** | BBB 회사채 무보증 | KOFIA / ECOS | KR 등급 표기: AA-, A-, BBB- 등 dash 포함 가능 |
+| **Default yield spread (BAA - AAA)** | BBB - AA 회사채 spread | ECOS 또는 derive | **§4.3 KR 등급 매핑 transparency 명시 의무** |
+| **Default return spread (corp LT - gov LT TR)** | 회사채 TR - 국고채 TR | KIS Pricing | TR index 매칭 필요 |
+| **Term spread (LTY - TBL)** | derived (10y 국고 - 91d 통안/CD) | ECOS | |
+| **CPI / Inflation** | KR CPI YoY (소비자물가지수) | 통계청 KOSIS / ECOS / fnguide `200_소비자물가지수.xlsx` | 시작 1965, base year 2020 |
+| **Core CPI** | KR core CPI (식료품·에너지 제외) | KOSIS | |
+| **IP / Industrial Production** | 광공업동향조사 생산지수 (산업생산지수) | KOSIS `전산업생산지수` | **시계열 결측 가능 — 경기종합지수 (composite cyclical indicator) fallback** (§4.3 자연 KR replication, session log Turn 14 evidence) |
+| **Unemployment rate** | 통계청 경제활동인구조사 실업률 | KOSIS / ECOS | |
+| **GDP** | KR GDP (한국은행 분기) | ECOS | quarterly only |
+| **Money supply (M1, M2)** | KR M1 / M2 / Lf | ECOS | |
+| **NBER recession dates** | 통계청 경기순환 또는 KDI 경기국면 | KOSIS / KDI | KR 정의 다름 — official dating committee 없음 |
+| **Crude oil (WTI)** | WTI 그대로 (글로벌) | EIA / FRED / fnguide `200_WTI.xlsx` | global commodity, KR 등가 X |
+| **Brent oil** | Brent 그대로 (글로벌) | EIA / FRED | |
+| **Exchange rate** | USD/KRW | ECOS / 한국은행 | KR-specific addition 가능성 (paper US 에 없음) |
+| **VIX (US implied vol)** | KOSPI200 VKOSPI | KRX | KR VKOSPI 2003-01+ |
+| **TED spread** | KR equivalent 없음 | — | **MISSING 가능성** → Task M |
+| **CDS spread (sovereign)** | KR sovereign CDS | Bloomberg / 한국은행 | vendor 제약 |
+| **NTIS (net equity expansion)** | KR derive (유상증자 + IPO - 자사주매입) | DART OpenDART API | DART event-based aggregation 필요 |
+
+### 19.1 매칭 fail 시 표준 대응 절차
+
+원저 macro/bond/econ 변수가 KR 에 정확히 매칭 없을 때:
+
+1. **Definition 차이 확인**: paper 의 변수 정의 (예: "10y gov bond yield, monthly average") 를 KR vendor 문서와 비교. 정의 일치하면 KR vendor 시계열 그대로 사용.
+2. **시계열 시작 차이**: KR vendor 시작이 paper sample 보다 늦으면 sample period 단축 (예: 국고채 10y 시작 2000-11 → paper 1990 sample 사용 불가).
+3. **Vendor product 부재**: KR 에 동등 vendor product 없음 → §4.3 자연 KR replication 가능한지 (예: 91d 통안 → 1m T-bill proxy) 또는 MISSING.
+4. **Composite indicator fallback**: 정확 KR equivalent 부재 시 composite indicator (예: 경기종합지수 → US IP proxy) 사용 가능. Phase 4 본문 transparency disclosure 의무.
+5. **MISSING 확정 시 Task M (지도교수 메일)** — `docs/rigor-lock.md` §4.1.
+
+### 19.2 흔한 silent proxy 패턴 (Lock A 위반 위험)
+
+- 원저 "T-bill rate" → KR "기준금리" 임의 사용 (KR 기준금리는 정책 금리, T-bill 과 다름)
+- 원저 "long-term gov bond" → KR "국고 3년" 임의 사용 (paper "long-term" 보통 10y 이상)
+- 원저 "default spread (BAA-AAA)" → KR "AA-A spread" 임의 사용 (KR BBB 등급 데이터 시작 시점 확인 필요)
+- 원저 "term spread" → KR "10y - 91d CD" vs "10y - 3y" 차이 (paper 정의 정확 확인)
+- 원저 "industrial production" → KR "전산업생산지수" 결측 → "경기종합지수" 사용 시 **명시 의무** (자의 substitute → silent proxy 위반)
+
+위 패턴 모두 Phase 1.5 existing-implementation audit (`AGENTS.md` §4.5) 또는 Phase 2.5 verification gate 가 검출. 학생 prior code 안 위 substitute 발견 시 paper-faithful 로 재계산.

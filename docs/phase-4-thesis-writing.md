@@ -43,6 +43,31 @@
 - §06 robustness: Phase 2 의 robustness sweep 결과 + 원저와 차이 해석
 - §07 discussion: KR 시장 특수성 (개인투자자 비중·상하한가·우선주·재벌 구조 등) 해석. 발표 핵심.
 
+### §07 Discussion 안 KR-specific contribution subsection (의무, session log 2026-05-30 evidence)
+
+KR replication 작업 중 paper US 와 다른 finding 발견 시 (예: paper US 는 1 predictor 유의, KR 9 predictor 유의 / paper 미언급 KR-specific event 의 추가 effect 등), 이 차이를 **단순 replication failure 가 아니라 KR-specific contribution 으로 framing 의무**.
+
+`07_discussion.md` 안 별도 subsection (예: §7.5):
+
+```markdown
+## 7.X KR-specific findings (본 연구의 학술적 contribution)
+
+### 7.X.1 KR 시장 mechanism 차이로 인한 결과 차이
+- <발견 1>: paper US 결과 = <X>, KR 결과 = <Y>. 차이의 KR-specific mechanism = <개인투자자 비중 / 재벌 구조 / short-sale 제약 / 외환 등>
+- ...
+
+### 7.X.2 KR-specific structural events 의 추가 effect
+- <event 예: KR 공매도 한시금지 5 episodes>: 원저 US 에 부재. 본 연구 robustness check 에서 effect = <+R²_OS X% / Sharpe Y / CER Z>.
+- ...
+
+### 7.X.3 본 연구의 후속 연구 방향
+- <KR-specific finding> 의 causal mechanism 심화 (예: propensity-score matching, RDD 등)
+- KR 외 다른 emerging market (대만 / 일본 / 중국) 으로 일반화 가능성
+- ...
+```
+
+이 subsection 이 단순 paper US 재현이 아닌 **학생 본인 thesis 의 학술적 가치 declaration**. Phase 5 final defense 의 "본 연구의 contribution 이 무엇인가?" 질문 답안 직접 입력.
+
 ## 2. 4-deferred mode (default, `template/thesis.{tex,md}` 부재)
 
 agent 가 template 부재 감지 시 자동으로 4-deferred 진입:

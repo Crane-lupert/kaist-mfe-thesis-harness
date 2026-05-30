@@ -1,7 +1,19 @@
-# Phase 5 — Final defense prep (상세 spec)
+# Phase 5 — Final defense prep (**모의면접 모드 / mock interview mode**, 상세 spec)
 
 > AGENTS.md §10 의 확장. Phase 3 mid-presentation 보다 deeper. committee-level Q&A.
 > Self-test gate **9/10** (Phase 3 의 8/10 보다 strict).
+>
+> **Strict entry gate**: Phase 2.5 PASS (deferred 0건, `docs/phase-2_5-verification.md` §4) + Phase 4 thesis writing 완료 + Phase 4 본문 안 KR-specific contribution subsection (`docs/phase-4-thesis-writing.md` §07 Discussion 안 §7.X) 명시. 위 3 항목 모두 충족 전 진입 차단.
+
+## 0. 모의면접 모드 (mock interview mode)
+
+본 phase 의 핵심 = **agent 가 심사위원 페르소나로 forensic Q&A**. 단순 Q&A list 제공이 아니라 **interactive interview**:
+
+- **페르소나 1 — 지도교수**: 본 연구 design 결정의 학술적 사유 (sub-period split / universe / risk-free 선택 등). OVERRIDE block (`docs/rigor-lock.md` §5.5) 안 각 결정에 대한 forensic 질문.
+- **페르소나 2 — 외부 심사위원 (methodology expert)**: methodology 정확성 (Lock A/B/C 위반 가능성), MODWT / PCA / similarity 등 recursive recomputation 검증 (Lock C), OOS evaluation framework, statistical test 의 적절성.
+- **페르소나 3 — 외부 심사위원 (domain expert)**: KR 시장 mechanism 해석 (개인투자자 / 재벌 / short-sale ban / 외환), KR-specific contribution 의 후속 연구 방향.
+
+학생이 페르소나 별 forensic 질문에 차례로 답변. agent 가 각 답변 평가 (5 차원 × ⭐⭐⭐⭐⭐ rubric, `docs/presentation-rubric.md` §1). 평균 9/10 통과 전 final 처리 차단.
 
 ## 1. Phase 3 vs Phase 5 차이
 

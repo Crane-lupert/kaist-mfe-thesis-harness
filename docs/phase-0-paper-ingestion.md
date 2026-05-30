@@ -15,16 +15,23 @@
 
 agent 가 자동으로 1→4 순서 시도. 각 단계 fail (설치 안 됨 / 오류) 시 다음으로 fallback. 전부 fail 시 user task escalation.
 
-### 1.2 변환 명령 (marker-pdf default)
+### 1.2 변환 명령 (marker-pdf default, PDF auto-detect)
+
+**PDF 파일명 강제 X**: agent 가 `paper/*.pdf` glob 으로 자동 감지. 1개 → 자동 사용. 2개 이상 → 학생에게 어느 것을 사용할지 묻기. rename 강제 금지.
 
 ```bash
-marker_single paper/original.pdf paper/converted/ --output_format markdown
+# Pseudo-shell — 첫 PDF 자동 감지
+PDF=$(ls paper/*.pdf | head -1)
+marker_single "$PDF" paper/converted/ --output_format markdown
 ```
 
 산출:
 - `paper/converted/paper.md` — 전체 MD (수식 `$$...$$`, 그림 `![](figures/fig_N.png)`)
 - `paper/converted/figures/fig_*.png` — 추출 그림
-- `paper/converted/paper_meta.json` — marker-pdf 가 추출한 metadata
+- `paper/converted/paper_meta.json` — marker-pdf 가 추출한 metadata + **`conversion_fidelity`** 필드:
+  - `high` — marker-pdf / docling (수식 + 표 + 그림 보존)
+  - `medium` — pdftotext + heuristics
+  - **`low` — PyMuPDF fallback (수식·표 손실 가능)** → Phase 1 의 table-based 변수 (paper Table N 의 numeric value 등) PDF 원본 재확인 의무
 
 ### 1.3 한국어 paper 대응
 
@@ -155,6 +162,46 @@ Inventory 의 `kr_replicability_hint` 작성 시 (CheckExpert KAIST 라이선스
 - "원저 methodology N 번째가 뭐였더라?" → `manifest.methodology_inventory[N]` 만 load (paper.md 전체 X)
 - "BE/ME 정의 다시 확인" → `manifest.variable_inventory` filter (paper 전체 X)
 - "robustness §5.3 만 자세히" → `sections[robustness]` path 의 robustness.md 만 load
+
+## 3.5 — Data probe (의무, session log 2026-05-30 evidence)
+
+**핵심**: 학생이 본인 보유 데이터 디렉토리를 명시한 경우 (예: `D:\my_kaist_data`, `E:\fnguide_backup`), agent 는 모든 raw 데이터 파일을 자동 parsing — **파일명만 보고 카테고리 추정 절대 금지**.
+
+### 3.5.1 Multi-path discovery
+
+Phase 0 entry 직후 agent 가 학생에게 1줄 질문: "추가 데이터 보유 경로 있나요? (예: `D:\my_data`, `E:\backup`) — 없으면 `data/raw/` 만 사용":
+
+학생 응답 받은 후 각 경로 의 모든 file (xlsx / csv / parquet / json) recursive list → `thesis_state/_data_paths.json`.
+
+### 3.5.2 Shallow parsing 의무
+
+각 file 마다:
+- Header (첫 row 또는 첫 5 rows — vendor 별 metadata layout)
+- 상위 5 data rows (sample values)
+- dtype (per column)
+- non-NaN coverage (%)
+- date 범위 (date column 존재 시)
+- 파일 size
+
+→ `thesis_state/_data_probe.json` (per file structure):
+```json
+{
+  "path": "D:/my_data/추가논문2/200_EPS.xlsx",
+  "size_mb": 1.4,
+  "encoding": "cp949",
+  "header_layout": "FnGuide DataGuide standard (row 0-7 metadata)",
+  "columns": ["A005930", "A000660", ...],
+  "sample_rows": [...],
+  "dtype_summary": {...},
+  "non_nan_coverage": 0.94,
+  "date_range": ["1989-01-01", "2024-06-30"],
+  "guessed_content": "KOSPI 200 EPS time-series, individual stock columns"
+}
+```
+
+### 3.5.3 Phase 1 입력으로 사용
+
+`_data_probe.json` 이 Phase 1 의 `02_data_inventory.md` 매핑 표 작성의 1차 입력. 파일명 기반 추정이 아니라 실제 column / sample row 기반 매핑 의무.
 
 ## 4. 0.4 — Feasibility 분석 (`thesis_state/00_feasibility.md`)
 

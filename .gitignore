@@ -16,12 +16,12 @@ env/
 .env.local
 *.env.local
 
-# --- Paper 원본 (학생 본인 보유, 라이선스 고려) ---
+# --- Paper 원본 + Phase 0 변환 산출 (학생 본인 보유, 라이선스 고려) ---
+paper/*.pdf
 paper/original.pdf
 paper/supplementary/
-paper/converted/figures/*.png
-paper/converted/figures/*.jpg
-paper/converted/figures/*.pdf
+paper/converted/
+!paper/converted/.gitkeep
 
 # --- Thesis 작업 결과 (학생이 본인 private repo 에 commit 할지 선택) ---
 # 기본: 작업 결과는 ignore. 학생이 본인 thesis private repo 에 commit 하려면 본 .gitignore 수정.
@@ -36,6 +36,27 @@ thesis_state/07_thesis_draft/
 thesis_state/08_build.log
 thesis_state/09_defense.md
 thesis_state/tool.json
+
+# Phase 0.3.5 data probe outputs + session log + ad-hoc verification artifacts
+thesis_state/_*.md
+thesis_state/_*.json
+thesis_state/_*.txt
+thesis_state/data_probe.json
+thesis_state/p2_5_verification_report.*
+thesis_state/session_log_*.md
+
+# Phase 2 agent-generated analysis code (학생 본인 산출)
+code/p1_*.py
+code/p2_*.py
+code/p3_*.py
+code/results/
+
+# Phase 0 ad-hoc probe scripts (agent generates per paper)
+tool-routing/probe_*.py
+tool-routing/pdf_to_md_*.py
+tool-routing/split_*.py
+tool-routing/find_*.py
+tool-routing/report_*.py
 
 # --- Data raw (vendor 라이선스, never commit) ---
 data/

@@ -4,7 +4,12 @@
 
 ## 필수
 
-- **`paper/original.pdf`** — 재현할 원저 paper. agent 는 Phase 0.1 에서 이를 markdown 으로 변환 (`paper/converted/`).
+- **원저 paper PDF (1개)** — 파일명 자유. agent 가 `paper/*.pdf` 자동 감지. 2개 이상이면 어느 것을 사용할지 묻기. **rename 강제 X**.
+
+```bash
+# 예: 그대로 drop in
+cp ~/Downloads/SomeAuthor_2024_PaperTitle.pdf paper/
+```
 
 ## 선택
 
@@ -17,6 +22,6 @@
 
 ## 주의
 
-- `original.pdf` 는 `.gitignore` 에 등록 → public repo 에 commit 안 됨 (저작권 보호).
+- PDF 는 `.gitignore` 에 등록 → public repo 에 commit 안 됨 (저작권 보호).
 - 학생이 본인 private thesis repo 에 commit 하고 싶으면 `.gitignore` 수정.
 - 데이터 vendor (fnguide / CheckExpert) 의 라이선스 약관 사전 확인 — paper 안 도표가 vendor 데이터 기반이면 외부 publish 제약 가능.

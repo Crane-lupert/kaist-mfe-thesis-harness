@@ -15,15 +15,20 @@ cd my-thesis
 
 GitHub CLI 없으면 GitHub 웹에서 "Use this template" 버튼.
 
-### Step 2 (1분) — paper 투입
+### Step 2 (1분) — paper + (선택) 데이터 경로 투입
 
-재현할 원저 paper 의 PDF 를 `paper/original.pdf` 로 저장:
+재현할 원저 paper 의 PDF 를 `paper/` 디렉토리에 그대로 저장 (**파일명 rename 불필요**):
 
 ```bash
-cp ~/Downloads/some-jf-paper.pdf paper/original.pdf
+cp ~/Downloads/some-jf-paper.pdf paper/
+# 예: paper/JFE_2024_paper_title.pdf 그대로
 ```
 
+agent 가 `paper/*.pdf` 자동 감지. 여러 PDF 있으면 어느 것을 쓸지 물어봄.
+
 선택: `paper/student_notes.md` 에 본인 관심사·이미 본 자료 작성 (생략 가능).
+
+선택: 본인 보유 raw 데이터가 기본 `data/raw/` 외 다른 디렉토리에 있으면 (예: `D:\my_kaist_data`, `E:\fnguide_backup`), Step 4 첫 입력 시 agent 에게 알려주기. agent 가 multi-path probe + shallow parsing 후 Phase 1 매핑 입력으로 사용.
 
 ### Step 3 (1분) — AI 툴 열기
 
